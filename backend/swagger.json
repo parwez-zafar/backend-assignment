@@ -357,7 +357,8 @@
             }
           }
         }
-      },"/api/v1/product/{productId}": {
+      },
+      "/api/v1/product/{productId}": {
         "get": {
           "summary": "Get Product Details",
           "description": "Retrieve details of a specific product by its ID.",
@@ -375,6 +376,60 @@
             },
             "404": {
               "description": "Not found - Product not found."
+            },
+            "500": {
+              "description": "Internal server error."
+            }
+          }
+        }
+      },
+      "/api/v1/reviews": {
+        "get": {
+          "summary": "Get All Reviews",
+          "description": "Retrieve a list of all product reviews.",
+          "responses": {
+            "200": {
+              "description": "Successfully retrieved a list of reviews."
+            },
+            "500": {
+              "description": "Internal server error."
+            }
+          }
+        }
+      },
+      "/api/v1/reviews": {
+        "delete": {
+          "summary": "Delete Review by Review ID and Product ID",
+          "description": "Delete a specific review by specifying both review ID and product ID.",
+          "parameters": [
+            {
+              "name": "reviewId",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Review ID of the review to delete."
+            },
+            {
+              "name": "productId",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Product ID associated with the review to delete."
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Review deleted successfully."
+            },
+            "400": {
+              "description": "Bad request - Invalid or missing review ID or product ID."
+            },
+            "404": {
+              "description": "Not found - Review not found."
             },
             "500": {
               "description": "Internal server error."
