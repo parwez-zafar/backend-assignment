@@ -3,6 +3,32 @@ const errorMiddleware = require('./middleware/error');
 const cookieParser = require('cookie-parser');
 const app = express();
 
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Ecommerce backend api',
+            version: '1.0.0'
+        },
+        servers: [
+            {
+                url: 'http://localhost:4000/'
+            }
+        ]
+    },
+    apis: ['./routes/adminRoute.js']
+}
+
+const swaggerSpec = swaggerJSDoc(options);
+// const swaggerDocument = require("./swagger.json");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+
+
+
 
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
