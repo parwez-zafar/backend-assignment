@@ -206,6 +206,181 @@
             }
           }
         }
+      },
+      "/api/v1/admin/product/new": {
+        "post": {
+          "summary": "Create New Product",
+          "description": "Create a new product with the provided details.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the product"
+                    },
+                    "price": {
+                      "type": "number",
+                      "description": "Price of the product"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description of the product"
+                    },
+                    "category": {
+                      "type": "string",
+                      "description": "Category of the product"
+                    },
+                    "images": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL of the product image"
+                    }
+                  },
+                  "required": ["name", "price", "description", "category", "images"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Product created successfully."
+            },
+            "400": {
+              "description": "Bad request - Invalid or missing product data."
+            },
+            "500": {
+              "description": "Internal server error."
+            }
+          }
+        }
+      },
+      "/api/v1/products": {
+        "get": {
+          "summary": "Get All Products",
+          "description": "Retrieve a list of all products.",
+          "responses": {
+            "200": {
+              "description": "Successfully retrieved a list of products."
+            },
+            "500": {
+              "description": "Internal server error."
+            }
+          }
+        }
+      },
+      "/api/v1/admin/product/{productId}": {
+        "put": {
+          "summary": "Update Product",
+          "description": "Update an existing product with the provided details.",
+          "parameters": [
+            {
+              "name": "productId",
+              "in": "path",
+              "required": true,
+              "description": "ID of the product to update."
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the product"
+                    },
+                    "price": {
+                      "type": "number",
+                      "description": "Price of the product"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description of the product"
+                    },
+                    "category": {
+                      "type": "string",
+                      "description": "Category of the product"
+                    },
+                    "images": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL of the product image"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Product updated successfully."
+            },
+            "400": {
+              "description": "Bad request - Invalid or missing product data."
+            },
+            "404": {
+              "description": "Not found - Product not found."
+            },
+            "500": {
+              "description": "Internal server error."
+            }
+          }
+        }
+      },
+      "/api/v1/admin/product/{productId}": {
+        "delete": {
+          "summary": "Delete Product",
+          "description": "Delete an existing product by its ID.",
+          "parameters": [
+            {
+              "name": "productId",
+              "in": "path",
+              "required": true,
+              "description": "ID of the product to delete."
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Product deleted successfully."
+            },
+            "404": {
+              "description": "Not found - Product not found."
+            },
+            "500": {
+              "description": "Internal server error."
+            }
+          }
+        }
+      },"/api/v1/product/{productId}": {
+        "get": {
+          "summary": "Get Product Details",
+          "description": "Retrieve details of a specific product by its ID.",
+          "parameters": [
+            {
+              "name": "productId",
+              "in": "path",
+              "required": true,
+              "description": "ID of the product to retrieve details."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully retrieved product details."
+            },
+            "404": {
+              "description": "Not found - Product not found."
+            },
+            "500": {
+              "description": "Internal server error."
+            }
+          }
+        }
       }
 
     
