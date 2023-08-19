@@ -2,6 +2,7 @@ const express = require('express');
 const errorMiddleware = require('./middleware/error');
 const cookieParser = require('cookie-parser');
 const app = express();
+const swaggerDocument = require("./swagger.json"); // Replace with the path to your JSON file
 
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -16,16 +17,16 @@ const options = {
         },
         servers: [
             {
-                url: 'http://localhost:4000/'
+                url: 'http://localhost:4000'
             }
         ]
     },
-    apis: ['./routes/adminRoute.js']
+    apis: ['./routes/*.js']
 }
 
 const swaggerSpec = swaggerJSDoc(options);
 // const swaggerDocument = require("./swagger.json");
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 
 
